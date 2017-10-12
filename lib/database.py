@@ -1,6 +1,10 @@
 from lib import merge
 
 def db_merge(queryset, expected, key_fn):
+    """
+    Create/update/delete objects in queryset as needed
+    to match expected objects.
+    """
     a = merge.key(queryset, key_fn)
     b = merge.key(expected, key_fn)
     new_objects = []

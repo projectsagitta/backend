@@ -21,14 +21,13 @@ class DeviceTypeSerializer(serializers.ModelSerializer):
 class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Device
-        fields = ('id', 'serial_no', 'device_type_id')
+        fields = ('id', 'serial_no', 'device_type')
 
 class StationSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     id_device = serializers.IntegerField(source='device.serial_no')
     id_station = serializers.IntegerField(source='station_num', required=False) #, allow_blank=True, max_length=100)
     time = serializers.DateTimeField()
-    #location = serializers.CharField()
     coord = CoordField(source='location')
     results = serializers.JSONField(source='measured_values')
 
