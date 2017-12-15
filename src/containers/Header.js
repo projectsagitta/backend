@@ -1,19 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Grid, Nav, NavItem } from 'react-bootstrap'
+import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap'
 
 // The Header creates links that can be used to navigate
 // between routes.
 const Header = () => (
-    <header>
-        <nav>
-            <ul>
-                <li><Link to='/'>Home</Link></li>
-                <li><Link to='/about'>About</Link></li>
-                <li><Link to='/participate'>Take part</Link></li>
-                <li><Link to='/database'>Data access</Link></li>
-                <li><Link to='/wiki'>Wiki</Link></li>
-            </ul>
-        </nav>
+    <header style={{marginTop: '30px'}}>
+        <Grid>
+            <Nav bsStyle="pills" pullRight={true}> 
+                <IndexLinkContainer to='/'><NavItem>Home</NavItem></IndexLinkContainer>    
+                <LinkContainer to='/about'><NavItem>About</NavItem></LinkContainer>    
+                <LinkContainer to='/participate'><NavItem>Take part</NavItem></LinkContainer>    
+                <LinkContainer to='/database'><NavItem>Data access</NavItem></LinkContainer>    
+                <LinkContainer to='/wiki'><NavItem>Wiki</NavItem></LinkContainer>                                
+            </Nav>
+        </Grid>
     </header>
 )
 
