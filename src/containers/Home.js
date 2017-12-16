@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import { Button } from 'react-bootstrap';
+import { Button } from 'semantic-ui-react';
 
 const Home = () => (
     <Fragment>
@@ -12,7 +12,7 @@ const Home = () => (
             <div style={{display: 'inline-flex', width: '100px', height: '100px', backgroundColor: '#ebebeb' }}></div>
             
         </div>
-        <Button bsStyle='primary' bsSize='large'>Test button</Button>
+        <Button>Click Here</Button>
     </Fragment>
 );
 
