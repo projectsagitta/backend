@@ -1,35 +1,39 @@
 import React, { Component } from 'react';
 
 class StationList extends Component {
+    constructor() {
+        super();
+        this.state = {
+            stations: []
+        };
+    }   
 
-    state = {
-        stations: []
-    };
-
-    async loadStations() {
-        this.setState({
-            stations: await fetch("https://kor.su/api/stations/")
-                .then(response =>response.json())
-                .catch(function() {
-                    console.log("error");
-                })
-        })
+    loadStations() {   
+        
     }
 
     componentDidMount() {
-        this.loadStations();
-        console.log('test', this.state.stations);
+        // this.loadStations();
+        fetch("https://dev.citizen-ocean.org/api/stations/").then(response => {            
+            return response.json();
+        }).then((jsonData) => {
+            this.setState({stations: jsonData[0].results});            
+            
+        }).catch(function() {
+            console.log("error");
+        })
     }
 
     render(){
+        console.log(this.state.stations);
         return(
-            <ul className="content-list">
-                {/*{this.state.stations.map((station, index) => (*/}
-                    {/*<li className="content-list__item" key={index}>*/}
-                        {/**/}
-                    {/*</li>*/}
-                {/*))}*/}
-            </ul>
+            <div className="content-list">
+                {this.state.stations.toString()}
+                {/*{this.state.stations.map((station) => {*/}
+                        {/*{station.toString();}*/}
+                    {/*}*/}
+                {/*)}*/}
+            </div>
         );
     }
 }

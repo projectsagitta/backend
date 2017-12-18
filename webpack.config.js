@@ -4,7 +4,7 @@ var path = require('path');
 
 
 module.exports = {
-    entry: __dirname + '/src/index.js',
+    entry: ['babel-polyfill', __dirname + '/src/index.js'],
     module: {
         loaders: [{
                 test: /\.(js|jsx)$/,
