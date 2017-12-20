@@ -52,14 +52,26 @@ const config = {
                 use: ["style-loader", "css-loader"]
             },
             // url-loader
+            // {
+            //     test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+            //     use: {
+            //         loader: 'url-loader',
+            //         options: {
+            //             limit: 8000
+            //         }
+            //     }
+            // },
+            // file loader
             {
-                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-                use: {
-                    loader: 'url-loader',
-                    options: {
-                        limit: 10000
+                test: /.*\.(gif|png|jpe?g)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '/images/[name].[ext]',
+                        }
                     }
-                }
+                ]
             }
         ]  
     }
