@@ -7,16 +7,14 @@ import Database from './Database'
 import Wiki from './Wiki'
 
 const Main = () => (
-    <main>
-        
-            <Switch>
-                <Route exact path='/' component={Home}/>
-                <Route path='/about' component={About}/>
-                <Route path='/participate' component={Participate}/>
-                <Route path='/database' component={Database}/>
-                <Route path='/wiki' component={Wiki}/>
-            </Switch>
-           
+    <main>        
+        <Switch>
+            <Route exact path='/' component={Home}/>
+            <Route path='/about' component={About}/>
+            <Route path='/participate' component={Participate}/>
+            <Route path='/database' component={Database}/>
+            <Route path='/wiki' component={Wiki}/>
+        </Switch>           
     </main>
 )
 

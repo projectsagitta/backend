@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Header from './Header';
 import Main from './Main';
 
 const App = () => (
-    <div>
+    <Fragment>
         <Header />
         <Main />
-    </div>
+    </Fragment>
 );
 
 export default App

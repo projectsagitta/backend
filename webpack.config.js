@@ -1,32 +1,53 @@
-var webpack = require('webpack');
-var path = require('path');
+const path = require('path');
+// const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 
-
-module.exports = {
-    entry: ['babel-polyfill', __dirname + '/src/index.js'],
-    module: {
-        loaders: [{
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader'
-            },{
-                test: /\.css$/,
-                loaders: ["style-loader", "css-loader"]
-            },{
-                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 10000
-                }
-            }
-        ]
-    },
-    output: {
-        path: __dirname + '/dist',
-        filename: 'bundle.js'
+const config = {
+    context: path.resolve(__dirname, "src"),
+    entry: ['babel-polyfill', './index.js'],
+    output: {        
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist')
     },
     devServer: {
-        contentBase: __dirname + '/dist'
+        contentBase: path.resolve(__dirname, "dist"),
+        open: true,
+        compress: true
+    },
+    devtool: 'inline-source-map',
+    // plugins: [
+    //     new CleanWebpackPlugin(['dist'])
+    // ],
+    module: {
+        rules: [
+            // babel-loader
+            {
+                test: /\.js$/,
+                include: /src/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader?cacheDirectory=true',
+                                       
+                }
+            },
+            // css-loader
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
+            },
+            // url-loader
+            {
+                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000
+                    }
+                }
+            }
+        ]  
     }
 };
+
+
+module.exports = config;

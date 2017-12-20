@@ -1,19 +1,20 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { Menu } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 // The Header creates links that can be used to navigate
 // between routes.
 const Header = () => (
     <header>
-        <Menu secondary={true}>
-            <Menu.Item as={NavLink} to='/' exact>Home</Menu.Item>
-            <Menu.Item as={NavLink} to='/about'>About</Menu.Item>
-            <Menu.Item as={NavLink} to='/participate'>Take part</Menu.Item>
-            <Menu.Item as={NavLink} to='/database'>Data access</Menu.Item>
-            <Menu.Item as={NavLink} to='/wiki'>Wiki</Menu.Item> 
-        </Menu>        
+        <nav>
+            <ul>
+                <li><Link to='/'>Home</Link></li>
+                <li><Link to='/about'>About</Link></li>
+                <li><Link to='/participate'>Take part</Link></li>
+                <li><Link to='/database'>Data access</Link></li>
+                <li><Link to='/wiki'>Wiki</Link></li>
+            </ul>
+        </nav>
     </header>
-);
+)
 
 export default Header
