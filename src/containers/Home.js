@@ -11,7 +11,7 @@ const { Content } = Layout;
 
 const Home = () => (
     <section style={styles.bannerWrapper}>
-        <img className="lazyload" data-src={require('../assets/media/IMG_4688-min.jpg')} style={styles.banner} alt=""/>
+        <img className="lazyload" src={require('../assets/media/IMG_4688-xs-min.jpg')} data-src={require('../assets/media/IMG_4688-min.jpg')} style={styles.banner} alt=""/>
         
         <h1 style={styles.bannerHeading}>Ocean Citizen Science Projects</h1>
         
