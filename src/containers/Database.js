@@ -1,11 +1,14 @@
 import React from 'react';
+import { Layout, Row, Col } from 'antd'
+
+const { Content } = Layout;
 import StationList from '../components/StationList';
 
 const Database = () => (
-    <div>
+    <Content>
         <p>A map visualizing data collected is coming!</p>
         <StationList />
-    </div>
+    </Content>
 );
 
 export default Database;

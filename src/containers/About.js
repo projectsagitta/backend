@@ -1,9 +1,12 @@
 import React from 'react'
+import { Layout, Row, Col } from 'antd'
+
+const { Content } = Layout;
 
 const About = () => (
-    <div>
+    <Content>
         <p>About project section</p>
-    </div>
+    </Content>
 )
 
 export default About

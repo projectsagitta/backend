@@ -1,9 +1,12 @@
 import React from 'react'
+import { Layout, Row, Col } from 'antd'
+
+const { Content } = Layout;
 
 const Participate = () => (
-    <div>
+    <Content>
         <p><b>Join us, it's fun!</b></p>
-    </div>
+    </Content>
 )
 
 export default Participate

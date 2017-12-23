@@ -30,7 +30,8 @@ const Header = () => (
 
 const styles = {
     header: {
-        padding: '0 50px'
+        padding: '0 50px',
+        marginBottom: '40px'
     },
     logo: {
         fontSize: '30px',

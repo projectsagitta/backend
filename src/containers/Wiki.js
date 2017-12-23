@@ -1,9 +1,12 @@
 import React from 'react'
+import { Layout, Row, Col } from 'antd'
+
+const { Content } = Layout;
 
 const Wiki = () => (
-    <div>
+    <Content>
         <p>Having questions about oceanography? We will try to answer them.</p>
-    </div>
+    </Content>
 )
 
 export default Wiki

@@ -10,7 +10,7 @@ import { Row, Col } from 'antd'
 const { Content } = Layout;
 
 const Home = () => (
-    <Fragment>
+    <section style={styles.bannerWrapper}>
         <img className="lazyload" data-src={require('../assets/media/IMG_4688-min.jpg')} style={styles.banner} alt=""/>
         
         <h1 style={styles.bannerHeading}>Ocean Citizen Science Projects</h1>
@@ -59,10 +59,14 @@ const Home = () => (
             </div>
         </Content>
         
-    </Fragment>
+    </section>
 );
 
 const styles ={
+    bannerWrapper: {
+        position: 'relative',
+        marginTop: '-35px'
+    },
     banner: {
         width: '100%',
         display: 'block',

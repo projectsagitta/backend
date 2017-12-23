@@ -28,7 +28,7 @@ class StationList extends Component {
         console.log(this.state.stations);
         return(
             <div className="content-list">
-                {this.state.stations.toString()}
+                {/*{this.state.stations.toString()}*/}
                 {/*{this.state.stations.map((station) => {*/}
                         {/*{station.toString();}*/}
                     {/*}*/}
