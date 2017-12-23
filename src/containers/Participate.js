@@ -5,7 +5,7 @@ const { Content } = Layout;
 
 const Participate = () => (
     <Content>
-        <p><b>Join us, it's fun!</b></p>
+        <h1>Join us!</h1>
     </Content>
 )
 

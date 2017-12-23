@@ -5,7 +5,7 @@ const { Content } = Layout;
 
 const About = () => (
     <Content>
-        <p>About project section</p>
+        <h1>About us</h1>
     </Content>
 )
 
