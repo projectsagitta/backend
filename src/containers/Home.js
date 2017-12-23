@@ -65,7 +65,7 @@ const Home = () => (
 const styles ={
     bannerWrapper: {
         position: 'relative',
-        marginTop: '-35px'
+        marginTop: '-21px'
     },
     banner: {
         width: '100%',
@@ -77,7 +77,7 @@ const styles ={
     },
     bannerHeading: {
         position: 'absolute',
-        top: '75px',
+        top: '40px',
         left: '50px',
         fontSize: '35px'
     }
