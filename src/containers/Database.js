@@ -1,12 +1,7 @@
 import React, {Component, Fragment} from 'react';
-import { Layout, Row, Col } from 'antd'
+import { Layout } from 'antd'
 const { Content } = Layout;
-import StationList from '../components/StationList';
-
-
-
-
-
+import MapContainer from '../components/MapContainer';
 
 class Database extends Component {
     render() {
@@ -15,13 +10,10 @@ class Database extends Component {
                 <Content>
                     <h1>Data collection</h1>                
                 </Content>
-                <StationList />
+                <MapContainer />
             </Fragment>
         )
     }
-
-} 
-    
-;
+};
 
 export default Database;

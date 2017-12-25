@@ -12,12 +12,9 @@ class StationList extends Component {
         };
     }   
 
-    loadStations() {   
-        
-    }
+    
 
-    componentDidMount() {
-        // this.loadStations();
+    componentDidMount() {        
         fetch("https://dev.citizen-ocean.org/api/stations/").then(response => {            
             return response.json();
         }).then((jsonData) => {
