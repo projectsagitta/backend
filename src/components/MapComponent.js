@@ -18,24 +18,25 @@ class MapComponent extends Component {
             const node = ReactDOM.findDOMNode(mapRef);
 
             const mapConfig = Object.assign({}, {
-                center: {lat: 0, lng: 180},
-                zoom: 2,
+                center: {lat: 40, lng: 180},
+                zoom: 3,
                 gestureHandling: "cooperative",
-                mapTypeId: 'terrain'
+                disableDefaultUI: true,
+                zoomControl: true
             });
             this.map = new maps.Map(node, mapConfig);
             let stationData = [];
 
-            this.props.stations.map( (station) => { 
-                
+            this.props.stations.map( (station) => {
+                const coordinatesArray = Object.values(station.coord);
                 stationData.push({
-                    location: new google.maps.LatLng(station.geometry.coordinates[1], station.geometry.coordinates[0])
+                    location: new google.maps.LatLng(coordinatesArray[0], coordinatesArray[1])
                 });
 
                 const marker = new google.maps.Marker({
-                    position: {lat: station.geometry.coordinates[1], lng: station.geometry.coordinates[0]},
+                    position: {lat: coordinatesArray[0], lng:coordinatesArray[1]},
                     map: this.map,
-                    // title: station.properties.title,
+                    title: `${coordinatesArray[0]}, ${coordinatesArray[1]}`,
                     // icon: {
                     //     url: ""
                     // }
@@ -48,7 +49,7 @@ class MapComponent extends Component {
 
     render() {
         const style = {
-            width: '85vw',
+            width: '100%',
             height: '75vh'
         };
 

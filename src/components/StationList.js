@@ -1,3 +1,5 @@
+// OLD COMPONENT - IS NOT USED
+
 import React, { Component, Fragment } from 'react';
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import { Layout, Row, Col } from 'antd'
@@ -10,9 +12,7 @@ class StationList extends Component {
             stations: [],
             coord: ''
         };
-    }   
-
-    
+    }       
 
     componentDidMount() {        
         fetch("https://dev.citizen-ocean.org/api/stations/").then(response => {            
