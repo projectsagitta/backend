@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { Form, DatePicker, TimePicker, Button } from 'antd';
+import { Form, DatePicker, TimePicker, Select, Button } from 'antd';
+import "./MapFilter.css"
+
 const FormItem = Form.Item;
 const MonthPicker = DatePicker.MonthPicker;
 const RangePicker = DatePicker.RangePicker;
@@ -9,7 +11,8 @@ class MapFilter extends Component {
     constructor() {
         super();
         this.state = {
-            formLayout: 'horizontal',
+            formLayout: 'vertical',
+            size: 'default',
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -31,35 +34,56 @@ class MapFilter extends Component {
     }
     
     render() {
+        const { formLayout } = this.state;
+        const { size } = this.state;
         const { getFieldDecorator } = this.props.form;
-        const formItemLayout = {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 8 },
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 16 },
-            },
-        };
+        
         const config = {
             rules: [{ type: 'object', required: true, message: 'Please select time!' }],
         };
         const rangeConfig = {
-            rules: [{ type: 'array', required: true, message: 'Please select time!' }],
+            rules: [{ type: 'array', message: 'Please select time!' }],
         };
         return (
             <Fragment>
-                <Form onSubmit={this.handleSubmit} layout="vertical">
-                    <FormItem
-                        {...formItemLayout}
-                        label="RangePicker"
+                <Form onSubmit={this.handleSubmit} layout={formLayout} style={{marginRight: '30px'}}>
+                    <FormItem                        
+                        label="Date period"
                     >
                         {getFieldDecorator('range-picker', rangeConfig)(
                             <RangePicker />
                         )}
                     </FormItem>
-                    <Button type="primary" htmlType="submit">Submit</Button>
+                    <FormItem
+                        label="Season"
+                    >
+                        <Select placeholder="Select a season" allowClear={true}>
+                            <Option value="Winter">Winter</Option>
+                            <Option value="Spring">Spring</Option>
+                            <Option value="Summer">Summer</Option>
+                            <Option value="Autumn">Autumn</Option>
+                        </Select>
+                    </FormItem>      
+                    <FormItem
+                        label="Month"
+                    >
+                        <Select size={size} placeholder="Select a month" allowClear={true}>
+                            <Option value="January">January</Option>
+                            <Option value="February">February</Option>
+                            <Option value="March">March</Option>
+                            <Option value="April">April</Option>
+                            <Option value="May">May</Option>
+                            <Option value="June">June</Option>
+                            <Option value="July">July</Option>
+                            <Option value="August">August</Option>
+                            <Option value="September">September</Option>
+                            <Option value="October">October</Option>
+                            <Option value="November">November</Option>
+                            <Option value="December">December</Option>
+                        </Select>
+                    </FormItem>      
+                    
+                    <Button type="primary" htmlType="submit" style={{width: '100%'}}>Submit</Button>
                 </Form>
             </Fragment>
         )

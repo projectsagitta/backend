@@ -14,6 +14,7 @@ const config = {
     },
     devServer: {
         contentBase: path.resolve(__dirname, "dist"),
+        historyApiFallback: true,
         open: true,
         compress: true
     },

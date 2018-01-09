@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {  Row, Col } from 'antd'
 import MapComponent from './MapComponent';
 import MapFilter from './MapFilter';
@@ -35,16 +36,18 @@ class MapContainer extends Component {
     render() {
         return (
             <div className="Map__container">
-                <div style={{paddingLeft: '50px', marginBottom: '20px'}}>
+                <div style={{paddingLeft: '50px'}}>
                     <Row>
-                        <Col span={12}>
+                        <Col xs={{span:8}} lg={{span:6}}>
                             <MapFilter onFilter={this.onFilter} />
+                        </Col>
+                        <Col xs={{span:16}} lg={{span:18}}>
+                            <Route path="/" render={(props) => <MapComponent google={this.props.google} stations={this.state.stations} {...props} />}/>
                         </Col>
                     </Row>                    
                 </div>               
 
-                <Route path="/" render={(props) => <MapComponent google={this.props.google} stations={this.state.stations} {...props} />}/>
-
+                
             </div>
         );
     }
