@@ -36,7 +36,7 @@ class MapContainer extends Component {
     render() {
         return (
             <div className="Map__container">
-                <div style={{paddingLeft: '50px'}}>
+                <div style={{paddingLeft: '50px', paddingRight: '50px'}}>
                     <Row>
                         <Col xs={{span:8}} lg={{span:6}}>
                             <MapFilter onFilter={this.onFilter} />

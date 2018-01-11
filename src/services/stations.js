@@ -4,8 +4,17 @@ export function fetchStations() {
 }
 
 export function searchStations(event) {
-    const minDate = event['range-picker'][0];
-    const maxDate = event['range-picker'][1];
-    return fetch(`https://dev.citizen-ocean.org/api/stations/query?starttime=${minDate}&endtime=${maxDate}`)
+    
+    let esc = encodeURIComponent;
+    let query = Object.keys(event)
+        .map((k) => esc(k) + '=' + esc(event[k]))
+        .join('&');
+    // const minDate = event['min-date'];
+    // const maxDate = event['max-date'];
+    // https://dev.citizen-ocean.org/api/stations/query?
+    // mindate=value&maxdate=value
+    // &month=value&season=value&
+    // minlat=value&maxlat=value&minlng=value&maxlng=value
+    return fetch(`https://dev.citizen-ocean.org/api/stations/query?${query}`)
         .then((res) => res.json())
 }

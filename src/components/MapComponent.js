@@ -22,7 +22,9 @@ export default class MapComponent extends Component {
             this.recenterMap();
         }
     }
-    
+    componentDidMount(){
+        this.loadMap();
+    }
     loadMap = () => {
         if (this.props && this.props.google) {   
             
@@ -96,21 +98,33 @@ export default class MapComponent extends Component {
         const google = this.props.google;
         const maps = google.maps;
 
-        if (map) {
-            let center = new maps.LatLng(curr.lat, curr.lng);
-            map.panTo(center)
+        if (map) {            
+            setTimeout(function(){
+                let center = new maps.LatLng(curr.lat, curr.lng);
+                map.panTo(center)
+            }, 0);            
         }
     }
 
     render() {
-        const style = {
-            width: '100%',
-            height: '75vh'
+        const styles = {
+            map: {
+                width: '100%',
+                height: '100%'
+            },
+            wrapper: {
+                width: '100%',
+                height: '75vh'
+            }
+            
         };
         return (
-            <div ref="map" style={style}>
-                loading map...
+            <div style={styles.wrapper}>
+                <div ref="map" style={styles.map}>
+                    loading map...
+                </div>
             </div>
+            
         )
     }
 }
@@ -122,7 +136,7 @@ MapComponent.propTypes = {
 };
 
 MapComponent.defaultProps = {
-    zoom: 8,
+    zoom: 6,
     initialCenter: {
         lat: 40,
         lng: 180
