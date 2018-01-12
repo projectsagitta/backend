@@ -8,9 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cd ./node_modules/.bin && webpack-dev-server --config ../../webpack.config.js",
-    "build": "cd ./node_modules/.bin && webpack --config ../../webpack.config.js",
-    "build:prod": "cd ./node_modules/.bin/ && webpack -p --config ../../webpack.config.js"
+    "dev": "cd ./node_modules/.bin && webpack-dev-server --config ../../webpack.dev.js",
+    "build": "cd ./node_modules/.bin && webpack --config ../../webpack.dev.js",
+    "build:prod": "cd ./node_modules/.bin/ && webpack -p --config ../../webpack.prod.js"
   },
   "repository": "git+https://github.com/projectsagitta/backend.git",
   "author": "natrey <natandreychenko@gmail.com>",
@@ -30,6 +30,8 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
+    "browserslist": "^2.11.1",
+    "caniuse-db": "^1.0.30000791",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.6",
@@ -46,5 +48,8 @@
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.5"
+  },
+  "devDependencies": {
+    "webpack-merge": "^4.1.1"
   }
 }

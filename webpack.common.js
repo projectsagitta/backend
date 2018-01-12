@@ -8,7 +8,7 @@ const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, './src/asse
 const config = {
     context: path.resolve(__dirname, "src"),
     entry: ['babel-polyfill', './index.js'],
-    output: {        
+    output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
@@ -18,7 +18,7 @@ const config = {
         open: true,
         compress: true
     },
-    devtool: 'inline-source-map',
+
     // plugins: [
     //     new CleanWebpackPlugin(['dist'])
     // ],
@@ -31,7 +31,7 @@ const config = {
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader?cacheDirectory=true',
-                                       
+
                 }
             },
             // less-loader
@@ -74,7 +74,7 @@ const config = {
                     }
                 ]
             }
-        ]  
+        ]
     }
 };
 
