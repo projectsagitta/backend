@@ -1,0 +1,58 @@
+/* TABLET */
+
+.header__trigger{
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .header__menu-wrapper{
+    position: relative;
+    z-index: 1;
+  }
+  
+  .header__trigger{
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+  
+  .header__trigger:before,
+  .header__trigger:after{
+    content: '';
+    display: inline-block;
+    position: absolute;
+    height: 3px;
+    width: 35px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  
+  .header__trigger:before{
+    top: 15px;
+    height: 13px;
+    border-top: 3px solid #058ceb;
+    border-bottom: 3px solid #058ceb;    
+  }
+  
+  .header__trigger:after{
+    bottom: 12px;
+    background: #058ceb;
+  }
+  
+  .header__menu{
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 51px;
+    background: #fff;
+  }
+  
+  .header__menu--visible{
+    display: block;
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers":["last 2 versions"],
+          "node":"current"
+        }
+      }
+    ],["react"]
+  ],
+  "plugins": [
+    ["import", {"libraryName": "antd", "style": true} ], 
+    "babel-plugin-transform-class-properties"   
+  ]
+}
