@@ -26,7 +26,7 @@ with open('/home/django/sagitta_secret_key.txt') as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.kor.su']
+ALLOWED_HOSTS = ['.kor.su', '.citizen-ocean.org']
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     #'allauth.socialaccount.providers.instagram',
     #'allauth.socialaccount.providers.vk',
     'rest_framework',
+    'django_filters',
     'common',
     'api',
 ]
@@ -151,5 +152,6 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 }

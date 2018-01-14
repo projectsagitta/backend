@@ -2,7 +2,9 @@ from django.shortcuts import render
 
 from common.models import Station, Device, DeviceType
 from .serializers import StationSerializer, StationVerboseSerializer, DeviceSerializer, DeviceTypeSerializer
+from .filters import StationFilter
 from rest_framework import viewsets
+from django_filters.rest_framework import DjangoFilterBackend
 
 class DeviceTypeViewSet(viewsets.ModelViewSet):
     """
@@ -35,3 +37,6 @@ class StationViewSet(viewsets.ModelViewSet):
             serializer_class = StationVerboseSerializer
         kwargs['context'] = self.get_serializer_context()
         return serializer_class(*args, **kwargs)
+
+    filter_backends = (DjangoFilterBackend,)
+    filter_class = StationFilter
