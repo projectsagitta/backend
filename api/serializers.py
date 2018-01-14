@@ -29,6 +29,14 @@ class StationSerializer(serializers.Serializer):
     id_station = serializers.IntegerField(source='station_num', required=False) #, allow_blank=True, max_length=100)
     time = serializers.DateTimeField()
     coord = CoordField(source='location')
+    results = serializers.JSONField(source='empty_values')
+
+class StationVerboseSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    id_device = serializers.IntegerField(source='device.serial_no')
+    id_station = serializers.IntegerField(source='station_num', required=False) #, allow_blank=True, max_length=100)
+    time = serializers.DateTimeField()
+    coord = CoordField(source='location')
     results = serializers.JSONField(source='measured_values')
 
     def create(self, validated_data):

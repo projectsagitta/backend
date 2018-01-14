@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from common.models import Station, Device, DeviceType
-from .serializers import StationSerializer, DeviceSerializer, DeviceTypeSerializer
+from .serializers import StationSerializer, StationVerboseSerializer, DeviceSerializer, DeviceTypeSerializer
 from rest_framework import viewsets
 
 class DeviceTypeViewSet(viewsets.ModelViewSet):
@@ -23,4 +23,15 @@ class StationViewSet(viewsets.ModelViewSet):
     A simple ViewSet for viewing and editing stations.
     """
     queryset = Station.objects.all()
-    serializer_class = StationSerializer
+    #serializer_class = StationSerializer
+    def get_serializer(self, *args, **kwargs):
+        """
+        Return the serializer instance that should be used for validating and
+        deserializing input, and for serializing output.
+        """
+        serializer_class = StationSerializer
+        if not kwargs.get('many', False):
+            # include values if only one station is requested
+            serializer_class = StationVerboseSerializer
+        kwargs['context'] = self.get_serializer_context()
+        return serializer_class(*args, **kwargs)

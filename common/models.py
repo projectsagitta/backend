@@ -20,6 +20,12 @@ class Station(models.Model):
     station_num = models.IntegerField(null=True)
     time = models.DateTimeField()
     location = models.PointField()
+    def empty_values(self):
+        '''
+        Empty array for StationSerializer
+        '''
+        return []
+
     def measured_values(self):
         names = dict([(p.id, p.name) for p in Parameter.objects.all()])
         result = []
