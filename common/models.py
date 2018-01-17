@@ -1,6 +1,29 @@
 from django.contrib.gis.db import models
 from lib import database as db
 
+from django.db.models import Transform
+
+# create transforms that can be used like this:
+# ...filter(location__lat__gt=42, location__lon__lt=55)
+class Longitude(Transform):
+    lookup_name = 'lon'
+    function = 'ST_X'
+
+    @property
+    def output_field(self):
+        return models.FloatField()
+
+class Latitude(Transform):
+    lookup_name = 'lat'
+    function = 'ST_Y'
+
+    @property
+    def output_field(self):
+        return models.FloatField()
+
+models.PointField.register_lookup(Latitude)
+models.PointField.register_lookup(Longitude)
+
 class DeviceType(models.Model):
     ''' Type of measuring device '''
     name = models.CharField(max_length=200)
