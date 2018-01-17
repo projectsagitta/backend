@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+from . import private_settings as priv
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,8 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open('/home/django/sagitta_secret_key.txt') as f:
-    SECRET_KEY = f.read().strip()
+SECRET_KEY = priv.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -43,13 +44,19 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.github',
+    #'allauth.socialaccount.providers.facebook',
+    #'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
     #'allauth.socialaccount.providers.instagram',
     #'allauth.socialaccount.providers.vk',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
     'django_filters',
+    #'oauth2_provider',
+    #'social_django',
+    #'rest_framework_social_oauth2',
     'common',
     'api',
 ]
@@ -77,6 +84,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -92,6 +101,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'sagitta',
+        'LOGIN': priv.DB_LOGIN,
+        'PASSWORD': priv.DB_PASSWORD,
     }
 }
 
@@ -136,10 +147,10 @@ LOGIN_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/var/www/django/sagitta/static'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+STATIC_ROOT = priv.STATIC_ROOT
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "static"),
+#]
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True
@@ -153,5 +164,15 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    #    'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    #    'rest_framework_social_oauth2.authentication.SocialAuthentication',
+    ),
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 }
+
+#AUTHENTICATION_BACKENDS = (
+#   #'rest_framework_social_oauth2.backends.DjangoOAuth2',
+#   'django.contrib.auth.backends.ModelBackend',
+#)
