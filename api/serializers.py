@@ -7,11 +7,24 @@ class CoordField(serializers.Field):
     """
     Coordinates are serialized into {lat: x, lon: y}
     """
+    default_error_messages = {
+        'required': 'Expected lat and lon fields, got {keys}.',
+        'invalid': 'Error in lat/lon: {msg}.',
+    }
+
     def to_representation(self, obj):
         return {'lon': obj[0], 'lat': obj[1]}
 
     def to_internal_value(self, data):
-        return Point(x=data['lon'], y=data['lat'], srid=4326)
+        try:
+            lat = data['lat']
+            lon = data['lon']
+        except KeyError:
+            self.fail('required', keys=', '.join(data.keys()))
+        try:
+            return Point(x=lon, y=lat, srid=4326)
+        except TypeError as e:
+            self.fail('invalid', msg=str(e))
 
 class DeviceTypeSerializer(serializers.ModelSerializer):
     class Meta:
