@@ -8,20 +8,35 @@ class Header extends Component{
     constructor() {
         super();
         this.state = {
-            isMobileVisible: false
+            isMobileVisible: false,
+            current: '/'
         };
-        this.toggleActiveClass= this.toggleActiveClass.bind(this);        
+        this.toggleActiveClass= this.toggleActiveClass.bind(this);   
+        this.handleLogoClick = this.handleLogoClick.bind(this);
     }
     toggleActiveClass() {
         const currentState = this.state.isMobileVisible;
         this.setState({ isMobileVisible: !currentState });
+    }
+    handleLogoClick() {
+        this.setState({
+            current: '/',
+            isMobileVisible: false
+        });
+    }
+    handleNavClick = (e) => {
+        console.log('click ', e);
+        this.setState({
+            current: e.key,
+            isMobileVisible: false
+        });
     }
     render() {        
         return (
             <header style={styles.header}>
                 <Row type="flex" justify="space-between">
                     <Col span={8}>
-                        <Link to="/" style={styles.logo}>Sagitta</Link>
+                        <Link to="/" onClick={this.handleLogoClick} style={styles.logo}>Sagitta</Link>
                     </Col>
                     <Col span={16}>
                         <Row type="flex" justify="end">
@@ -29,12 +44,16 @@ class Header extends Component{
                                 <div className="header__menu-wrapper">
                                     <span className="header__trigger" onClick={this.toggleActiveClass}></span>
                                     
-                                    <Menu className={`header__menu ${this.state.isMobileVisible ? 'header__menu--visible':null}`} mode="horizontal">
-                                        <Menu.Item key="/"><Link to='/'>Home</Link></Menu.Item>
-                                        <Menu.Item key="/about"><Link to='/about'>About</Link></Menu.Item>
-                                        <Menu.Item key="/participate"><Link to='/participate'>Take part</Link></Menu.Item>
-                                        <Menu.Item key="/database"><Link to='/database'>Data access</Link></Menu.Item>
-                                        <Menu.Item key="/wiki"><Link to='/wiki'>Wiki</Link></Menu.Item>
+                                    <Menu className={`header__menu ${this.state.isMobileVisible ? 'header__menu--visible':null}`} 
+                                          mode="horizontal" 
+                                          selectedKeys={[this.state.current]}
+                                          onClick={this.handleNavClick}
+                                            >
+                                        <Menu.Item key="/"><Link to='/' onClick={this.handleClick}>Home</Link></Menu.Item>
+                                        <Menu.Item key="/about"><Link to='/about' onClick={this.handleClick}>About</Link></Menu.Item>
+                                        <Menu.Item key="/participate"><Link to='/participate' onClick={this.handleClick}>Take part</Link></Menu.Item>
+                                        <Menu.Item key="/database"><Link to='/database' onClick={this.handleClick}>Data access</Link></Menu.Item>
+                                        <Menu.Item key="/wiki"><Link to='/wiki' onClick={this.handleClick}>Wiki</Link></Menu.Item>
                                     </Menu>
                                 </div>
 
