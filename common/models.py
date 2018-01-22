@@ -56,22 +56,21 @@ class Station(models.Model):
         for measure in self.measure_set.order_by('index'):
             if i != measure.index:
                 i = measure.index
-                result.append({'index': i})
+                result.append({})
             parameter_name = names[measure.parameter_id]
             result[-1][parameter_name] = measure.value
         return result
     def save_measured_values(self, vals):
         params = dict([(p.name, p.id) for p in Parameter.objects.all()])
         measures = []
-        for val in vals:
-            i = val['index']
+        for i,val in enumerate(vals):
             for k,v in val.items():
                 if k == 'index':
                     continue
                 if k not in params:
                     p = Parameter.objects.create(name=k, display_name=k)
                     params[k] = p.id
-                measures.append(Measure(station=self, index=i, parameter_id=params[k], value=v))
+                measures.append(Measure(station=self, index=i+1, parameter_id=params[k], value=v))
         db.db_merge(Measure.objects.filter(station=self), measures, lambda x: (x.index, x.parameter_id))
 
     def __str__(self):
