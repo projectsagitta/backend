@@ -17,11 +17,13 @@ class MapContainer extends Component {
         this.state = {
             stations: []            
         };
+        this.onFilter = this.onFilter.bind(this); 
     }
 
     componentDidMount() {
         fetchStations()
             .then((json) => {
+                console.log(json);
                 this.setState({ stations: json }, )
             })
     };
@@ -29,6 +31,7 @@ class MapContainer extends Component {
     onFilter(event) {
         searchStations(event)
             .then((json) => {
+                console.log(json);
                 this.setState({ stations: json })
             })
     };

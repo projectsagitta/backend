@@ -24,8 +24,8 @@ class MapFilter extends Component {
                 month: undefined,
                 minlat: '',
                 maxlat: '',
-                minlng: '',
-                maxlng: ''
+                minlon: '',
+                maxlon: ''
             }            
         };
         this.handleSubmit = this.handleSubmit.bind(this);        
@@ -57,7 +57,7 @@ class MapFilter extends Component {
     render() {
         const { formLayout } = this.state;
         const { size } = this.state;
-        const { dateRange, season, month, minlat, maxlat, minlng, maxlng } = this.state.fields;
+        const { dateRange, season, month, minlat, maxlat, minlon, maxlon } = this.state.fields;
         const { getFieldDecorator } = this.props.form;
         const isDisabled = Boolean(month || dateRange.length);
         const isDisabled2 = Boolean(season || dateRange.length);
@@ -139,22 +139,22 @@ class MapFilter extends Component {
                         <InputGroup compact>
                             <InputNumber style={{ width: '43%', textAlign: 'center' }} 
                                    placeholder="Minimum" 
-                                   value={minlng}
+                                   value={minlon}
                                      min={-180}
                                      max={180}
                                      step={0.1}
-                                     onChange={this.handleFieldChange.bind(this, 'minlng')}
+                                     onChange={this.handleFieldChange.bind(this, 'minlon')}
                             />
                             <Input style={{ width: '14%', borderLeft: 0, pointerEvents: 'none', backgroundColor: '#fff' }} 
                                    placeholder="~" 
                                    disabled />
                             <InputNumber style={{ width: '43%', textAlign: 'center', borderLeft: 0 }} 
                                    placeholder="Maximum" 
-                                   value={maxlng}
+                                   value={maxlon}
                                      min={-180}
                                      max={180}
                                      step={0.1}
-                                     onChange={this.handleFieldChange.bind(this, 'maxlng')}
+                                     onChange={this.handleFieldChange.bind(this, 'maxlon')}
                             />
                         </InputGroup>  
                     </FormItem> 
