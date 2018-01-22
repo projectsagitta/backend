@@ -17,8 +17,19 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic.base import RedirectView
 
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from rest_auth.registration.views import SocialLoginView
+
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('api.urls')),
-    url(r'^$', RedirectView.as_view(url='api/', permanent=False)),
+    #url(r'^auth/', include('rest_framework_social_oauth2.urls')),
+
+    url(r'^rest-auth/', include('rest_auth.urls')),
+    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    url(r'^rest-auth/google/$', GoogleLogin.as_view(), name='goog_login'),
+    #url(r'^$', RedirectView.as_view(url='api/', permanent=False)),
 ]

@@ -7,11 +7,24 @@ class CoordField(serializers.Field):
     """
     Coordinates are serialized into {lat: x, lon: y}
     """
+    default_error_messages = {
+        'required': 'Expected lat and lon fields, got {keys}.',
+        'invalid': 'Error in lat/lon: {msg}.',
+    }
+
     def to_representation(self, obj):
         return {'lon': obj[0], 'lat': obj[1]}
 
     def to_internal_value(self, data):
-        return Point(x=data['lon'], y=data['lat'], srid=4326)
+        try:
+            lat = data['lat']
+            lon = data['lon']
+        except KeyError:
+            self.fail('required', keys=', '.join(data.keys()))
+        try:
+            return Point(x=lon, y=lat, srid=4326)
+        except TypeError as e:
+            self.fail('invalid', msg=str(e))
 
 class DeviceTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,6 +37,14 @@ class DeviceSerializer(serializers.ModelSerializer):
         fields = ('id', 'serial_no', 'device_type')
 
 class StationSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    id_device = serializers.IntegerField(source='device.serial_no')
+    id_station = serializers.IntegerField(source='station_num', required=False) #, allow_blank=True, max_length=100)
+    time = serializers.DateTimeField()
+    coord = CoordField(source='location')
+    results = serializers.JSONField(source='empty_values')
+
+class StationVerboseSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     id_device = serializers.IntegerField(source='device.serial_no')
     id_station = serializers.IntegerField(source='station_num', required=False) #, allow_blank=True, max_length=100)
