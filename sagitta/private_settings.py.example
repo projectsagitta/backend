@@ -1,0 +1,14 @@
+# This is a template for private configuration
+# Copy this file to private_settings.py and edit it appropriately
+# DO NOT ADD private_settings.py to version control, this file contains secret information
+
+# Login and password for PostgreSQL database
+DB_LOGIN = ''
+DB_PASSWORD = ''
+
+# full path to static directory. Run "python manage.py collectstatic" to collect 
+STATIC_ROOT = '/var/www/static'
+
+# Django secret key. You can generate SECRET_KEY using the following one-liner:
+# python -c 'from django.utils import crypto as c;chars = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)";print(c.get_random_string(50, chars))'
+SECRET_KEY = ''
