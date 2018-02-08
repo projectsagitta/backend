@@ -19,7 +19,7 @@ export default class MapComponent extends Component {
             this.loadMap();
         }
         if (prevState.currentLocation !== this.state.currentLocation) {
-            this.recenterMap();
+            // this.recenterMap();
         }
     }
     componentDidMount(){
@@ -49,44 +49,45 @@ export default class MapComponent extends Component {
             
             let stationData = [];
 
-            let promiseCoord = this.props.stations.map( (station) => {
-                const coordinatesArray = Object.values(station.coord);
+            this.props.stations.map( (station) => {
+                let latCoord = station.coord.lat;
+                let lngCoord = station.coord.lon;
                 stationData.push({
-                    location: new google.maps.LatLng(coordinatesArray[0], coordinatesArray[1])
+                    location: new google.maps.LatLng(latCoord, lngCoord)
                 });
 
                 const marker = new google.maps.Marker({
-                    position: {lat: coordinatesArray[0], lng:coordinatesArray[1]},
+                    position: {lat: latCoord, lng: lngCoord},
                     map: this.map,
-                    title: `${coordinatesArray[0]}, ${coordinatesArray[1]}`                    
+                    title: `${latCoord}, ${lngCoord}`                    
                 });
                 
-                return coordinatesArray;
+                // return coordinatesArray;
             });
-            let centerCoords = null;
-            Promise.all(promiseCoord).then((results) => { 
-                let centerLat = results.map((latitude) => {
-                    return latitude[0]
-                }).reduce( ( a, b ) => a + b, 0 ) / results.length;
-                centerLat = +(centerLat).toFixed(4);
-                
-                let centerLong = results.map((long) => {
-                    return long[1]
-                }).reduce( ( a, b ) => a + b, 0 ) / results.length;
-                centerLong = +(centerLong).toFixed(4);
-                
-                centerCoords = [centerLat, centerLong];
-                return centerCoords;
-            }).then((coord) => {
-                if(!coord.includes(NaN)){
-                    this.setState({
-                        currentLocation: {
-                            lat: coord[0],
-                            lng: coord[1]
-                        }
-                    });
-                }   
-            });
+            // let centerCoords = null;
+            // Promise.all(promiseCoord).then((results) => { 
+            //     let centerLat = results.map((latitude) => {
+            //         return latitude[0]
+            //     }).reduce( ( a, b ) => a + b, 0 ) / results.length;
+            //     centerLat = +(centerLat).toFixed(4);
+            //    
+            //     let centerLong = results.map((long) => {
+            //         return long[1]
+            //     }).reduce( ( a, b ) => a + b, 0 ) / results.length;
+            //     centerLong = +(centerLong).toFixed(4);
+            //    
+            //     centerCoords = [centerLat, centerLong];
+            //     return centerCoords;
+            // }).then((coord) => {
+            //     if(!coord.includes(NaN)){
+            //         this.setState({
+            //             currentLocation: {
+            //                 lat: coord[0],
+            //                 lng: coord[1]
+            //             }
+            //         });
+            //     }   
+            // });
             
         }
     }
@@ -136,9 +137,9 @@ MapComponent.propTypes = {
 };
 
 MapComponent.defaultProps = {
-    zoom: 6,
+    zoom: 3,
     initialCenter: {
-        lat: 40,
+        lat: 45,
         lng: 180
     }
 };
